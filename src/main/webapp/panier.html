@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Mon panier</title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="all,follow">
+<!-- Bootstrap CSS-->
+<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+<!-- Font Awesome CSS-->
+<link rel="stylesheet"
+	href="vendor/font-awesome/css/font-awesome.min.css">
+<!-- Google fonts - Roboto-->
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Roboto:300,400,700">
+<!-- Bootstrap Select-->
+<link rel="stylesheet"
+	href="vendor/bootstrap-select/css/bootstrap-select.min.css">
+<!-- owl carousel-->
+<link rel="stylesheet"
+	href="vendor/owl.carousel/assets/owl.carousel.css">
+<link rel="stylesheet"
+	href="vendor/owl.carousel/assets/owl.theme.default.css">
+<!-- theme stylesheet-->
+<link rel="stylesheet" href="css/style.default.css"
+	id="theme-stylesheet">
+<!-- Custom stylesheet - for your changes-->
+<link rel="stylesheet" href="css/custom.css">
+<!-- Favicon and apple touch icons-->
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+
+<!-- Tweaks for older IEs-->
+<!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+</head>
+<body data-ng-app="app">
+	<div id="all" data-ng-controller="PanierController">
+		
+		
+		<div class="top-bar">
+			<div class="container">
+				<div class="row d-flex align-items-center">
+					<div class="col-md-6 d-md-block d-none"></div>
+					<div class="col-md-6">
+						<div class="d-flex justify-content-md-end justify-content-between">
+							<ul class="list-inline contact-info d-block d-md-none">
+								<li class="list-inline-item"><a href="#"><i
+										class="fa fa-phone"></i></a></li>
+								<li class="list-inline-item"><a href="#"><i
+										class="fa fa-envelope"></i></a></li>
+
+							</ul>
+                            <div class="login"><a href class="login-btn"><span class="d-none d-md-inline-block"><img src="img/online.PNG"
+						>Achraf GRINI </span></a><a href="customer-register.html" class="signup-btn"><i class="fa fa-sign-out"></i><span class="d-none d-md-inline-block">Déconnexion</span></a></div>
+							
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+			<!-- Réservation Modal-->
+		<div id="rsrv-modal" tabindex="-1" role="dialog"
+			aria-labelledby="login-modalLabel" aria-hidden="true"
+			class="modal fade">
+			<div role="document" class="modal-dialog">
+				<div class="modal-content" >
+					<div class="modal-header">
+						<h4 id="login-modalLabel" class="modal-title">Confirmation de résrvation</h4>
+						<button type="button" data-dismiss="modal" aria-label="Close"
+							class="close">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<p class="text-center text-muted">
+							 Votre réservation a réussi, vous avez {{sl.dureeMaxRsrv}} jours pour récupérer vos objets des différents points de location, au delà de cette periode les objets seront libérés.
+						</p>
+					<p class="text-center">
+								<button class="btn btn-template-outlined" ng-click="reserver()">
+									<i class="fa fa-sign-in"></i> fermer
+								</button>
+							</p>
+					</div>
+					</div>
+					
+				
+			</div>
+		</div>
+		<!-- Réservation modal end-->
+		<!-- Navbar Start-->
+		<header class="nav-holder ">
+			<div id="navbar" role="navigation" class="navbar navbar-expand-lg">
+				<div class="container">
+					<a href="" class="navbar-brand "><img src="img/logo.JPG"
+						alt="Universal logo" class="d-none d-md-inline-block"><span
+						class="sr-only">Universal - go to homepage</span></a>
+					<button type="button" data-toggle="collapse"
+						data-target="#navigation"
+						class="navbar-toggler btn-template-outlined">
+						<span class="sr-only">Toggle navigation</span><i
+							class="fa fa-align-justify"></i>
+					</button>
+					<div id="navigation" class="navbar-collapse collapse">
+						<ul class="nav navbar-nav ml-auto">
+							<li data-ng-repeat="item in barMenu"
+								data-ng-class="{'nav-item':true , 'active':item.state}"><a
+								href="">{{item.title}} </a></li>
+
+						</ul>
+					</div>
+					<div id="search" class="collapse clearfix">
+						<form role="search" class="">
+							<div class="input-group">
+								<input type="text" placeholder="Search" class="form-control"><span
+									class="input-group-btn">
+									<button type="submit" class="btn btn-template-main">
+										<i class="fa fa-search"></i>
+									</button>
+								</span>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		<!-- Navbar End-->
+
+		<div id="heading-breadcrumbs">
+			<div class="container">
+				<div class="row d-flex align-items-center flex-wrap">
+					<div class="col-md-7">
+						<h3 class="h2">Mon panier</h3>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		
+     
+		<!-- GET IT-->
+ <div id="content">
+        <div class="container">
+          
+                  <table class="table">
+                    <thead>
+                      <tr>
+                      <th colspan="2" class="border-top-0"></th>
+                        <th colspan="2" class="border-top-0">Objet</th>
+                        <th colspan="2" class="border-top-0">Point de livraison</th>
+                        <th class="border-top-0">Prix journalier de location</th>
+                        <th class="border-top-0">Caution</th>
+                        <th class="border-top-0">Durée de location</th>
+                        <th class="border-top-0">Prix de location</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="f in favoris">
+                      <td><input type="checkbox" ng-model="f.isCheked"></td>
+                        <td><a href="#"><img src="img/objets/{{f.titre}}/1.jpg"  class="img-fluid"></a></td>
+                        <td><a href="#">{{f.titre}}</a></td>
+                         <td></td>
+                         <td>{{f.pointLivraison}}</td>
+                         <td></td>
+                        <td>{{f.prixJrn}}</td>
+                        <td>{{f.cautionLocation}}</td>
+                 <td>   <select ng-model="f.dureeLocation" ng-options="x for x in tab"></select></td>
+                      <td>{{f.dureeLocation*f.prixJrn}}</td>
+                        
+                      </tr>
+                      
+                    </tbody>
+                    <tfoot>
+                      
+                      <tr>
+                        <th colspan="5" class="text-right">Total</th>
+                        <th>{{calculTotal()}} €</th>
+                      </tr>
+                    </tfoot>
+                  </table>
+                <p class="text-center">
+                        <button type="" class="btn btn-template-outlined" data-toggle="modal" data-target="#rsrv-modal"><i class="fa fa-calendar"></i> Réserver</button>
+                        <a href ng-click="renitPl()" class="btn btn-sm btn-danger" ><i
+									class="fa fa-times-circle"></i><span
+									class="d-none d-md-inline-block">Supprimer</span></a>
+                      </p>
+        </div>
+      </div>
+		<!-- FOOTER -->
+		<footer class="main-footer">
+
+			<div class="copyrights">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-4 text-center-md">
+							<p>&copy; 2018. Université Paris Dauphine</p>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+	<!-- Javascript files-->
+	<script src="vendor/jquery/jquery.min.js"></script>
+	<script src="vendor/popper.js/umd/popper.min.js"> </script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="vendor/jquery.cookie/jquery.cookie.js"> </script>
+	<script src="vendor/waypoints/lib/jquery.waypoints.min.js"> </script>
+	<script src="vendor/jquery.counterup/jquery.counterup.min.js"> </script>
+	<script src="vendor/owl.carousel/owl.carousel.min.js"></script>
+	<script src="vendor/owl.carousel2.thumbs/owl.carousel2.thumbs.min.js"></script>
+	<script src="js/jquery.parallax-1.1.3.js"></script>
+	<script src="vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+	<script src="vendor/jquery.scrollto/jquery.scrollTo.min.js"></script>
+	<script src="js/front.js"></script>
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
+</body>
+</html>
